@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import Error from './Error'
-const Form = ({patients,setPatients}) => {
+import Error from "./Error.jsx";
+const Form = ({clients,setClients}) => {
     const [petName, setPetName] = useState('');
     const [owner, setOwner] = useState('');
     const [email, setEmail] = useState('');
@@ -8,6 +8,12 @@ const Form = ({patients,setPatients}) => {
     const [symptoms, setSymptoms] = useState('');
 
     const [error, setError] = useState(false)
+
+    const IdGenerator = () => {
+        const random = Math.random().toString(36).substring(2)
+        const date = Date.now().toString(36)
+        return random + date
+    }
     const handleSubmit = (e) => {
         //Prevent form submission
         e.preventDefault();
@@ -18,16 +24,17 @@ const Form = ({patients,setPatients}) => {
         }
         setError(false)
 
-        //Object Patient
-        const objPatient = {
+        //Object Client
+        const objClient = {
             petName,
             owner,
             email,
             dateIni,
-            symptoms
+            symptoms,
+            id: IdGenerator()
         }
         //Take a copy of the current customers and add the new one
-        setPatients([...patients, objPatient])
+        setClients([...clients, objClient])
 
         //Reset form
         setPetName('')
@@ -50,7 +57,7 @@ const Form = ({patients,setPatients}) => {
                 onSubmit={handleSubmit}
                 className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
 
-                { error &&  <Error><p>All fields are required</p></Error>}
+                { error &&  <Error message='All fields are required'/>}
 
                 <div className="mb-5">
                     <label htmlFor="pet" className="block text-gray-700 uppercase font-bold">
