@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Error from './Error'
-const Form = () => {
+const Form = ({patients,setPatients}) => {
     const [petName, setPetName] = useState('');
     const [owner, setOwner] = useState('');
     const [email, setEmail] = useState('');
@@ -9,17 +9,33 @@ const Form = () => {
 
     const [error, setError] = useState(false)
     const handleSubmit = (e) => {
+        //Prevent form submission
         e.preventDefault();
         //Form validation
         if( [ petName, owner, email, dateIni, symptoms ].includes('') ){
             setError(true)
             return;
         }
-
         setError(false)
+
+        //Object Patient
+        const objPatient = {
+            petName,
+            owner,
+            email,
+            dateIni,
+            symptoms
+        }
+        //Take a copy of the current customers and add the new one
+        setPatients([...patients, objPatient])
+
+        //Reset form
+        setPetName('')
+        setOwner('')
+        setEmail('')
+        setDateIni('')
+        setSymptoms('')
     }
-
-
 
     return (
         <div className="md:w-1/2 lg:w-2/5 mx-5">
