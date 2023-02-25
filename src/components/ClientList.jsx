@@ -1,7 +1,11 @@
 import Patient from './Client.jsx'
 import Client from "./Client.jsx";
-const ClientList = ({clients}) => {
+import {useEffect} from "react";
+const ClientList = ({clients, setClient, client}) => {
 
+    useEffect( () => {
+        console.log("Se agrego nuevo lcinet")
+    }, [clients])
 
     return (
         <div className="md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
@@ -20,6 +24,7 @@ const ClientList = ({clients}) => {
                                 <Client
                                     key={client.id}
                                     client={client}
+                                    setClient={setClient}
                                 />
                             ))
                         }

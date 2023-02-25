@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Error from "./Error.jsx";
-const Form = ({clients,setClients}) => {
+const Form = ({clients,setClients,client, setClient}) => {
     const [petName, setPetName] = useState('');
     const [owner, setOwner] = useState('');
     const [email, setEmail] = useState('');
@@ -9,6 +9,15 @@ const Form = ({clients,setClients}) => {
 
     const [error, setError] = useState(false)
 
+    useEffect( () => {
+        if( Object.keys(client).length > 0 ){
+            setPetName(client.petName)
+            setOwner(client.owner)
+            setEmail(client.email)
+            setDateIni(client.dateIni)
+            setSymptoms(client.symptoms)
+        }
+    }, [client])
     const IdGenerator = () => {
         const random = Math.random().toString(36).substring(2)
         const date = Date.now().toString(36)
@@ -33,8 +42,22 @@ const Form = ({clients,setClients}) => {
             symptoms,
             id: IdGenerator()
         }
-        //Take a copy of the current customers and add the new one
-        setClients([...clients, objClient])
+
+        if( client.id ){
+            //Editing
+            objClient.id = client.id
+
+            const clientsModified = clients.map( clientState => clientState.id  === client.id ? objClient : clientState )
+            setClients(clientsModified)
+            //Reset State
+            setClient({})
+
+        }else{
+            //New client
+            objClient.id = IdGenerator();
+            //Take a copy of the current customers and add the new one
+            setClients([...clients, objClient])
+        }
 
         //Reset form
         setPetName('')
@@ -130,7 +153,7 @@ const Form = ({clients,setClients}) => {
                 <input
                     type="submit"
                     className="bg-blue-600 w-full p-3 text-white uppercase font-bold hover:bg-blue-700 cursor-pointer transition-colors"
-                    value={ 'Add Patient' }
+                    value={ client.id ? 'Edit Patient' : 'Add Patient' }
                 />
             </form>
 

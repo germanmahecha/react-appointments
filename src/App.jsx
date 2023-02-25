@@ -4,7 +4,9 @@ import Form from "./components/Form.jsx";
 import ClientList from "./components/ClientList.jsx";
 function App() {
     const [clients, setClients] = useState([]);
+    const [client, setClient] = useState({});
 
+    console.log(client)
     return (
         <div className="container mx-auto mt-20">
              <Header />
@@ -12,8 +14,14 @@ function App() {
                 <Form
                     clients={clients}
                     setClients={setClients}
+                    client={client}
+                    setClient={setClient}
                 />
-                <ClientList clients={clients}/>
+                <ClientList
+                    clients={clients}
+                    setClient={setClient}
+                    client={client}
+                />
             </div>
         </div>
   )
