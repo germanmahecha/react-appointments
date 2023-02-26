@@ -1,4 +1,7 @@
 # react-appointments
-Veterinary Client List
-Training in REACT, Tailwind, localStorage
+>Veterinary Client List
+ 
+- REACT, 
+- Tailwind CSS, 
+- localStorage
 
