@@ -1,4 +1,4 @@
-const Client = ({client, setClient}) => {
+const Client = ({client, setClient, deleteClient}) => {
     const { petName, owner, email, dateIni, symptoms, id } = client
     return (
         <div className="mx-5 my-10 bg-white shadow-md px-5 pt-10 pb-5 rounded-xl">
@@ -32,7 +32,7 @@ const Client = ({client, setClient}) => {
                 <button
                     type="button"
                     className="py-2 px-10 bg-red-500 hover:bg-red-600 text-white font-bold uppercase rounded-lg"
-
+                    onClick={ ()=> deleteClient(id) }
                 >Delete</button>
             </div>
         </div>

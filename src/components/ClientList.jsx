@@ -1,7 +1,7 @@
 import Patient from './Client.jsx'
 import Client from "./Client.jsx";
 import {useEffect} from "react";
-const ClientList = ({clients, setClient, client}) => {
+const ClientList = ({clients, setClient, client, deleteClient}) => {
 
     useEffect( () => {
         console.log("Se agrego nuevo lcinet")
@@ -25,6 +25,7 @@ const ClientList = ({clients, setClient, client}) => {
                                     key={client.id}
                                     client={client}
                                     setClient={setClient}
+                                    deleteClient={deleteClient}
                                 />
                             ))
                         }
